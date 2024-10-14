@@ -99,12 +99,6 @@
       "relation": "manyToOne",
       "target": "api::author.author",
       "inversedBy": "articles"
-    },
-    "comments": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::comment.comment",
-      "mappedBy": "article"
     }
   }
 }
