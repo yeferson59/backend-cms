@@ -491,6 +491,7 @@ export interface ApiAboutAbout extends Struct.SingleTypeSchema {
     singularName: 'about';
     pluralName: 'abouts';
     displayName: 'About';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -504,6 +505,12 @@ export interface ApiAboutAbout extends Struct.SingleTypeSchema {
     author: Schema.Attribute.Relation<'oneToOne', 'api::author.author'>;
     content: Schema.Attribute.DynamicZone<['content.blocks']> &
       Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    cover: Schema.Attribute.Media<'images'> &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
