@@ -1,10 +1,10 @@
-import type { Struct, Schema } from '@strapi/strapi';
+import type { Schema, Struct } from '@strapi/strapi';
 
 export interface ContentBlocks extends Struct.ComponentSchema {
   collectionName: 'components_content_blocks';
   info: {
-    displayName: 'Rich text';
     description: '';
+    displayName: 'Rich text';
   };
   attributes: {
     body: Schema.Attribute.Blocks & Schema.Attribute.Required;
