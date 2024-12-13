@@ -8,7 +8,7 @@ WORKDIR /opt/
 
 RUN npm i -g pnpm@9.15.0
 
-COPY package.json package-lock.json ./
+COPY package.json pnpm-lock.yaml ./
 RUN pnpm add -g node-gyp
 RUN pnpm config set fetch-retry-maxtimeout 600000 -g && pnpm add --only=production
 ENV PATH=/opt/node_modules/.bin:$PATH
