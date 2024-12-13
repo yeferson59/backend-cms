@@ -7,7 +7,7 @@ ENV NODE_ENV=${NODE_ENV}
 
 WORKDIR /opt/
 COPY package.json pnpm-lock.yaml ./
-RUN pnpm add -g node-gyp
+RUN npm install -g node-gyp
 RUN pnpm config set fetch-retry-maxtimeout 600000 -g && pnpm install --only=production
 ENV PATH=/opt/node_modules/.bin:$PATH
 WORKDIR /opt/app
