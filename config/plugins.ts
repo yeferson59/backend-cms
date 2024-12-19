@@ -18,9 +18,10 @@ module.exports = ({ env }) => ({
       connections: {
         default: {
           connection: {
-            host: "redis.railway.internal",
-            port: 6379,
-            db: 0,
+            host: env("REDIS_HOST", "redis.railway.internal"),
+            port: env.int("REDIS_PORT", 6379),
+            db: env.int("REDIS_DB", 0),
+            password: env("REDIS_PASSWORD", null), // Añade la contraseña
           },
           settings: {
             debug: false,
@@ -29,7 +30,6 @@ module.exports = ({ env }) => ({
       },
     },
   },
-  // Step 2: Configure the redis cache plugin
   "rest-cache": {
     config: {
       provider: {
@@ -45,7 +45,6 @@ module.exports = ({ env }) => ({
         clearRelatedCache: true,
         maxAge: 3600000,
         contentTypes: [
-          // list of Content-Types UID to cache
           "api::category.category",
           "api::article.article",
           "api::global.global",
