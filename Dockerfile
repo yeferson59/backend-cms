@@ -1,6 +1,7 @@
 # Creating multi-stage build for production
 FROM node:22.13-alpine3.20 AS build
 RUN apk update && apk add --no-cache build-base gcc autoconf automake zlib-dev libpng-dev vips-dev git > /dev/null 2>&1
+RUN npm i -g npm
 RUN npm i -g pnpm@9.15.4
 ARG NODE_ENV=production
 ENV NODE_ENV=${NODE_ENV}
