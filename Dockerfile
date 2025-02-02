@@ -1,21 +1,21 @@
 # Creating multi-stage build for production
-FROM node:22.12-alpine3.20 AS build
+FROM node:22.13-alpine3.20 AS build
 RUN apk update && apk add --no-cache build-base gcc autoconf automake zlib-dev libpng-dev vips-dev git > /dev/null 2>&1
-RUN npm i -g pnpm@9.15.0
+RUN npm i -g pnpm@9.15.4
 ARG NODE_ENV=production
 ENV NODE_ENV=${NODE_ENV}
 
 WORKDIR /opt/
 COPY package.json pnpm-lock.yaml ./
-RUN npm install -g node-gyp
-RUN pnpm config set fetch-retry-maxtimeout 600000 -g && pnpm install --only=production
+RUN npm i -g node-gyp
+RUN pnpm config set fetch-retry-maxtimeout 600000 -g && pnpm i --only=production
 ENV PATH=/opt/node_modules/.bin:$PATH
 WORKDIR /opt/app
 COPY . .
 RUN pnpm run build
 
 # Creating final production image
-FROM node:22.12-alpine3.20
+FROM node:22.13-alpine3.20
 RUN apk add --no-cache vips-dev
 ARG NODE_ENV=production
 ENV NODE_ENV=${NODE_ENV}
